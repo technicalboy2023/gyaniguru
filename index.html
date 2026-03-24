@@ -129,7 +129,7 @@
                 </div>
                 
                 <!-- User Menu (Hidden by default) -->
-                <div class="hidden items-center gap-4" id="user-section">
+                <div class="hidden md:flex items-center gap-4" id="user-section">
                     <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700">
                         <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
                         <span id="credits-display" class="text-sm font-medium">5/5</span>
@@ -177,9 +177,23 @@
             <a href="#pricing" onclick="toggleMobileMenu()"><i class="fa-solid fa-tag w-5"></i>Pricing</a>
         </nav>
         <div class="mt-auto pt-6 border-t border-slate-800">
-            <button onclick="auth.showLoginModal(); toggleMobileMenu();" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-center">
-                Get Started Free
-            </button>
+            <div id="mobile-auth-section">
+                <button onclick="auth.showLoginModal(); toggleMobileMenu();" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-center hover:opacity-90 transition-opacity">
+                    Get Started Free
+                </button>
+            </div>
+            <div id="mobile-user-section" class="flex-col gap-4" style="display:none;">
+                <div class="flex items-center justify-between px-2 text-slate-300">
+                    <span class="text-sm">Available Credits</span>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
+                        <span id="mobile-credits-display" class="font-medium text-brand-400">5/5</span>
+                    </div>
+                </div>
+                <button onclick="auth.logout(); toggleMobileMenu();" class="w-full py-3 rounded-xl border border-slate-700 text-slate-300 font-medium text-center hover:bg-slate-800 hover:text-white transition-colors">
+                    Logout
+                </button>
+            </div>
         </div>
     </div>
 
@@ -923,22 +937,30 @@
             const authSection = document.getElementById('auth-section');
             const userSection = document.getElementById('user-section');
             const creditsDisplay = document.getElementById('credits-display');
+            const mobileAuth = document.getElementById('mobile-auth-section');
+            const mobileUser = document.getElementById('mobile-user-section');
+            const mobileCredits = document.getElementById('mobile-credits-display');
             
             if (user) {
-                authSection.classList.add('hidden');
-                userSection.classList.remove('hidden');
-                userSection.classList.add('flex');
+                if(authSection) authSection.style.display = 'none';
+                if(userSection) userSection.style.display = '';
+                if(mobileAuth) mobileAuth.style.display = 'none';
+                if(mobileUser) mobileUser.style.display = 'flex';
                 
                 document.getElementById('user-name').textContent = user.displayName || user.email?.split('@')[0] || 'User';
                 
                 const usage = usageTracker.getUsage();
                 const limit = usage.plan === 'pro' ? '∞' : '5';
                 const used = usage.plan === 'pro' ? '0' : usage.used;
-                creditsDisplay.textContent = usage.plan === 'pro' ? '∞' : `${used}/${limit}`;
+                const creditText = usage.plan === 'pro' ? '∞' : `${used}/${limit}`;
+                
+                if(creditsDisplay) creditsDisplay.textContent = creditText;
+                if(mobileCredits) mobileCredits.textContent = creditText;
             } else {
-                authSection.classList.remove('hidden');
-                userSection.classList.add('hidden');
-                userSection.classList.remove('flex');
+                if(authSection) authSection.style.display = '';
+                if(userSection) userSection.style.display = 'none';
+                if(mobileAuth) mobileAuth.style.display = '';
+                if(mobileUser) mobileUser.style.display = 'none';
             }
         }
         
