@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>GyaniGuru - AI Chat & Image Generation Platform</title>
+    <meta name="description" content="GyaniGuru is your AI companion for intelligent conversations and stunning image generation. Free tier available, upgrade for unlimited access.">
+    <meta name="keywords" content="AI chat, image generation, AI tools, artificial intelligence, GyaniGuru">
+    <meta name="author" content="GyaniGuru">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://technicalboy2023.github.io/gyaniguru/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technicalboy2023.github.io/gyaniguru/">
+    <meta property="og:title" content="GyaniGuru - AI Chat & Image Generation">
+    <meta property="og:description" content="Your AI companion for intelligent conversations and stunning image generation">
+    <meta property="og:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="GyaniGuru - AI Chat & Image Generation">
+    <meta property="twitter:description" content="Your AI companion for intelligent conversations and stunning image generation">
+    <meta name="twitter:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d9488'/%3E%3Ctext y='.9em' font-size='70' x='12'%3E🧠%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d9488'/%3E%3Ctext y='.9em' font-size='70' x='12'%3E🧠%3C/text%3E%3C/svg%3E">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "GyaniGuru",
+      "url": "https://technicalboy2023.github.io/gyaniguru/",
+      "description": "AI Chat, Image Generation and Blog Writing Platform",
+      "applicationCategory": "AIApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        accent: {
+                            purple: '#8b5cf6',
+                            pink: '#ec4899',
+                            orange: '#f97316',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-white text-lg"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight text-white">
+                        Gyani<span class="text-brand-400">Guru</span>
+                    </span>
+                </a>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="agents/chat.html" class="text-sm text-slate-400 hover:text-white transition-colors">AI Chat</a>
+                    <a href="agents/image.html" class="text-sm text-slate-400 hover:text-white transition-colors">Image Gen</a>
+                    <a href="tools/blog.html" class="text-sm text-slate-400 hover:text-white transition-colors">Blog Writer</a>
+                    <a href="#pricing" class="text-sm text-slate-400 hover:text-white transition-colors">Pricing</a>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center gap-4" id="auth-section">
+                    <button onclick="auth.showLoginModal()" class="text-sm text-slate-400 hover:text-white transition-colors">
+                        Log in
+                    </button>
+                    <button onclick="auth.showLoginModal()" class="px-5 py-2 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white text-sm font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:scale-105">
+                        Get Started
+                    </button>
+                </div>
+                
+                <!-- User Menu (Hidden by default) -->
+                <div class="hidden items-center gap-4" id="user-section">
+                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700">
+                        <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
+                        <span id="credits-display" class="text-sm font-medium">5/5</span>
+                    </div>
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center">
+                                <i class="fa-solid fa-user text-white text-xs"></i>
+                            </div>
+                            <span id="user-name">User</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 top-full mt-2 w-48 py-2 bg-slate-900 border border-slate-800 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">Dashboard</a>
+                            <a href="#pricing" class="block px-4 py-2 text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">Upgrade Plan</a>
+                            <div class="border-t border-slate-800 my-2"></div>
+                            <button onclick="auth.logout()" class="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-slate-800 transition-colors">
+                                <i class="fa-solid fa-sign-out-alt mr-2"></i>Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn md:hidden" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu-panel" id="mobile-panel">
+        <div class="flex items-center justify-between mb-8">
+            <span class="font-display font-bold text-lg text-white">Gyani<span class="text-brand-400">Guru</span></span>
+            <button onclick="toggleMobileMenu()" class="text-slate-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="agents/chat.html"><i class="fa-solid fa-comments w-5"></i>AI Chat</a>
+            <a href="agents/image.html"><i class="fa-solid fa-image w-5"></i>Image Gen</a>
+            <a href="tools/blog.html"><i class="fa-solid fa-blog w-5"></i>Blog Writer</a>
+            <a href="#pricing" onclick="toggleMobileMenu()"><i class="fa-solid fa-tag w-5"></i>Pricing</a>
+        </nav>
+        <div class="mt-auto pt-6 border-t border-slate-800">
+            <button onclick="auth.showLoginModal(); toggleMobileMenu();" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-center">
+                Get Started Free
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="relative pt-32 pb-24 overflow-hidden min-h-[90vh] flex items-center">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <!-- Particles -->
+            <div class="particle-container">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            <!-- Grid pattern -->
+            <div class="absolute inset-0" style="background-image: radial-gradient(rgba(148,163,184,0.07) 1px, transparent 1px); background-size: 40px 40px;"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-sm font-medium mb-8 reveal">
+                <i class="fa-solid fa-sparkles text-xs"></i>
+                <span>Powered by Advanced AI</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+            </div>
+
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 reveal reveal-delay-1">
+                Your AI <span class="gradient-text">Companion</span>
+                <br class="hidden sm:block">
+                <span class="text-4xl sm:text-5xl lg:text-6xl text-slate-300">for Everything</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-10 reveal reveal-delay-2">
+                Intelligent conversations, stunning image generation, and SEO blog writing — all in one platform. 
+                Start free, upgrade when you need more.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-3">
+                <a href="agents/chat.html" class="group px-8 py-4 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-lg hover:shadow-2xl hover:shadow-brand-500/25 transition-all hover:scale-105 flex items-center gap-3">
+                    <i class="fa-solid fa-rocket group-hover:animate-bounce"></i>
+                    Start Chatting Free
+                </a>
+                <a href="agents/image.html" class="px-8 py-4 rounded-full bg-slate-800/80 text-white font-semibold text-lg hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-3 hover:border-slate-600">
+                    <i class="fa-solid fa-image"></i>
+                    Generate Images
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto reveal reveal-delay-4">
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-display font-bold text-white" data-count="10">0</div>
+                    <div class="text-xs sm:text-sm text-slate-500 mt-1">Active Users</div>
+                </div>
+                <div class="text-center border-x border-slate-800">
+                    <div class="text-3xl sm:text-4xl font-display font-bold text-white" data-count="50">0</div>
+                    <div class="text-xs sm:text-sm text-slate-500 mt-1">Chats Generated</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-display font-bold text-white" data-count="100">0</div>
+                    <div class="text-xs sm:text-sm text-slate-500 mt-1">Images Created</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         TOP AD (NATIVE STYLE)
+         ========================================== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="ad-banner-styled" style="min-height:100px;">
+            <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+            <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FEATURES SECTION
+         ========================================== -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-950 to-slate-950"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">What You Can Do</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Powerful AI tools designed for creators, professionals, and everyone in between.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Chat Feature -->
+                <a href="agents/chat.html" class="glass-card p-8 group reveal reveal-delay-1">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-comments text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3">AI Chat</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Intelligent conversations, writing help, code generation, brainstorming — your AI assistant for everything.</p>
+                    <div class="flex items-center text-brand-400 font-medium text-sm">
+                        <span>Try AI Chat</span>
+                        <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <!-- Image Feature -->
+                <a href="agents/image.html" class="glass-card p-8 group reveal reveal-delay-2">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-accent-purple/20">
+                        <i class="fa-solid fa-image text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3">Image Generation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Create stunning visuals from text. Perfect for social media, presentations, and creative projects.</p>
+                    <div class="flex items-center text-accent-purple font-medium text-sm">
+                        <span>Generate Images</span>
+                        <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- Blog Feature -->
+                <a href="tools/blog.html" class="glass-card p-8 group reveal reveal-delay-3">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-orange to-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-orange-500/20">
+                        <i class="fa-solid fa-blog text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-white mb-3">Blog Writer</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Generate SEO-optimized blog posts in seconds. Choose tone, length, and topic — AI does the rest.</p>
+                    <div class="flex items-center text-orange-400 font-medium text-sm">
+                        <span>Write a Blog</span>
+                        <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         HOW IT WORKS
+         ========================================== -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">How It Works</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Get started in 3 simple steps — no setup required.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Step 1 -->
+                <div class="text-center reveal reveal-delay-1 step-connector">
+                    <div class="step-number bg-gradient-to-br from-brand-500 to-brand-600 text-white mx-auto mb-5">1</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Choose Your Tool</h3>
+                    <p class="text-slate-400 text-sm">Pick from AI Chat, Image Generator, or Blog Writer</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="text-center reveal reveal-delay-2 step-connector">
+                    <div class="step-number bg-gradient-to-br from-accent-purple to-accent-pink text-white mx-auto mb-5">2</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Enter Your Prompt</h3>
+                    <p class="text-slate-400 text-sm">Describe what you need — be as creative as you want</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="text-center reveal reveal-delay-3">
+                    <div class="step-number bg-gradient-to-br from-amber-500 to-orange-500 text-white mx-auto mb-5">3</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Get Results</h3>
+                    <p class="text-slate-400 text-sm">Receive AI-powered outputs instantly — copy, download, or share</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MID-PAGE AD (NATIVE INLINE)
+         ========================================== -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="ad-inline" style="min-height:120px;">
+            <script>
+                atOptions = {
+                    'key' : 'a0881adf05133f70c92dbe9314d9f556',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/a0881adf05133f70c92dbe9314d9f556/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         TESTIMONIALS
+         ========================================== -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Loved by Creators</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">See what our users are saying about GyaniGuru.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div class="testimonial-stars mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"GyaniGuru's AI chat is incredibly smart. It helped me brainstorm ideas for my startup and even wrote my pitch deck outline. Absolutely love it!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="testimonial-avatar">R</div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">Rahul S.</div>
+                            <div class="text-slate-500 text-xs">Startup Founder</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div class="testimonial-stars mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"The image generator is mind-blowing! I created all my social media thumbnails in minutes. The quality is just as good as paid tools."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">P</div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">Priya M.</div>
+                            <div class="text-slate-500 text-xs">Content Creator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card reveal reveal-delay-3">
+                    <div class="testimonial-stars mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star text-slate-600"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">"The blog writer saved me hours of work. I generate drafts, tweak them a bit, and publish. My blog traffic increased 3x in two months!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #f97316, #eab308);">A</div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">Amit K.</div>
+                            <div class="text-slate-500 text-xs">Freelance Blogger</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PRICING SECTION
+         ========================================== -->
+    <section id="pricing" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Simple Pricing</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Start free and upgrade when you need more power.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Free Plan -->
+                <div class="glass-card p-8 reveal reveal-delay-1">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">Free Plan</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-display font-bold text-white">$0</span>
+                            <span class="text-slate-500">/month</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>5 requests per day</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>AI Chat access</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Image generation</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Blog writer</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-500">
+                            <i class="fa-solid fa-xmark"></i>
+                            <span>No priority support</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="auth.showLoginModal()" class="w-full py-3 rounded-xl bg-slate-800 text-white font-semibold hover:bg-slate-700 transition-colors border border-slate-700">
+                        Get Started Free
+                    </button>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="relative glass-card p-8 gradient-border reveal reveal-delay-2">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span class="px-4 py-1 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white text-sm font-semibold shadow-lg shadow-brand-500/25">
+                            Most Popular
+                        </span>
+                    </div>
+                    
+                    <div class="mb-6 mt-2">
+                        <h3 class="text-xl font-semibold text-white mb-2">Pro Plan</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-display font-bold text-white">$9</span>
+                            <span class="text-slate-500">/month</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Unlimited requests</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Priority processing</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>High-res images</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Ad-free experience</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>24/7 support</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="showUpgradeModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:scale-[1.02]">
+                        Upgrade to Pro
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Payment Methods Note -->
+            <div class="mt-8 text-center reveal">
+                <p class="text-slate-500 text-sm mb-3">Secure payment via</p>
+                <div class="flex items-center justify-center gap-4 text-2xl text-slate-500">
+                    <i class="fa-brands fa-cc-visa hover:text-white transition-colors cursor-pointer"></i>
+                    <i class="fa-brands fa-cc-mastercard hover:text-white transition-colors cursor-pointer"></i>
+                    <i class="fa-brands fa-cc-amex hover:text-white transition-colors cursor-pointer"></i>
+                    <i class="fa-brands fa-bitcoin hover:text-orange-400 transition-colors cursor-pointer"></i>
+                    <i class="fa-brands fa-ethereum hover:text-purple-400 transition-colors cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FAQ SECTION
+         ========================================== -->
+    <section class="py-20 relative">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                <p class="text-slate-400">Everything you need to know about GyaniGuru.</p>
+            </div>
+
+            <div class="space-y-3 reveal reveal-delay-1" id="faq-container">
+                <div class="faq-item active">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is GyaniGuru free to use?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! GyaniGuru offers a free plan with 5 daily requests across all AI tools. You can chat, generate images, and write blogs without paying anything.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What AI models do you use?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We use state-of-the-art language models for chat and blog writing. For image generation, we use advanced diffusion models that create high-quality visuals from text descriptions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I use generated content commercially?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, all content generated through GyaniGuru — whether text or images — can be used for personal and commercial purposes. Pro users get additional rights and higher resolution outputs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I upgrade to Pro?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Click the "Upgrade to Pro" button in the pricing section. We accept credit cards and cryptocurrency payments. The upgrade is instant and comes with a 30-day money-back guarantee.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What happens when I hit the daily limit?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>When you reach 5 daily requests, you'll need to wait until the next day or upgrade to Pro for unlimited access. Your generated content is always saved and accessible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         BOTTOM AD
+         ========================================== -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="ad-native" style="min-height:100px;">
+            <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+            <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="border-t border-slate-800/50 py-16 bg-slate-950 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center">
+                            <i class="fa-solid fa-brain text-white text-lg"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl text-white">Gyani<span class="text-brand-400">Guru</span></span>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-sm mb-4">Your AI-powered platform for intelligent conversations, stunning images, and SEO-optimized content.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                            <i class="fa-brands fa-discord"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Links -->
+                <div>
+                    <h4 class="font-semibold text-white text-sm mb-4 uppercase tracking-wider">Tools</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="agents/chat.html" class="text-slate-400 hover:text-white transition-colors">AI Chat</a></li>
+                        <li><a href="agents/image.html" class="text-slate-400 hover:text-white transition-colors">Image Generator</a></li>
+                        <li><a href="tools/blog.html" class="text-slate-400 hover:text-white transition-colors">Blog Writer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white text-sm mb-4 uppercase tracking-wider">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="text-sm text-slate-600">
+                    © 2025 GyaniGuru. All rights reserved.
+                </div>
+                <div class="text-xs text-slate-700">
+                    Made with <i class="fa-solid fa-heart text-brand-500"></i> by GyaniGuru Team
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         FLOATING CTA
+         ========================================== -->
+    <div class="floating-cta hidden" id="floating-cta">
+        <a href="agents/chat.html">
+            <i class="fa-solid fa-bolt"></i>
+            <span class="hidden sm:inline">Try AI Free</span>
+            <span class="sm:hidden"><i class="fa-solid fa-message"></i></span>
+        </a>
+    </div>
+
+    <!-- ==========================================
+         STICKY MOBILE AD
+         ========================================== -->
+    <div class="ad-sticky-bottom" id="sticky-ad">
+        <button class="ad-close" onclick="closeStickyAd()"><i class="fa-solid fa-xmark"></i></button>
+        <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+        <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+    </div>
+
+    <!-- ==========================================
+         LOGIN MODAL
+         ========================================== -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="auth.closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 relative" style="animation: fadeInScale 0.3s ease-out;">
+                <button onclick="auth.closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-white mb-2">Welcome to GyaniGuru</h2>
+                    <p class="text-slate-400">Sign in to start creating</p>
+                </div>
+                
+                <!-- Google Sign In -->
+                <button onclick="auth.signInWithGoogle()" class="w-full py-3 px-4 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-100 transition-colors flex items-center justify-center gap-3 mb-4">
+                    <i class="fa-brands fa-google text-xl"></i>
+                    Continue with Google
+                </button>
+                
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-slate-800"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-slate-900 text-slate-500">Or continue with email</span>
+                    </div>
+                </div>
+                
+                <!-- Email Form -->
+                <form onsubmit="auth.signInWithEmail(event)" class="space-y-4">
+                    <input type="email" id="email-input" placeholder="Enter your email" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors" required>
+                    <input type="password" id="password-input" placeholder="Password" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors" required>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all">
+                        Sign In / Sign Up
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         UPGRADE MODAL
+         ========================================== -->
+    <div id="upgrade-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeUpgradeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl p-8 relative" style="animation: fadeInScale 0.3s ease-out;">
+                <button onclick="closeUpgradeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-crown text-white text-2xl"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-white mb-2">Upgrade to Pro</h2>
+                    <p class="text-slate-400">Choose your payment method</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button class="w-full py-4 px-6 rounded-xl bg-slate-800 border border-slate-700 hover:border-brand-500/50 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
+                                <i class="fa-solid fa-credit-card text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="font-semibold text-white">Credit Card</div>
+                                <div class="text-sm text-slate-400">Visa, Mastercard, Amex</div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-white transition-colors"></i>
+                    </button>
+                    
+                    <button class="w-full py-4 px-6 rounded-xl bg-slate-800 border border-slate-700 hover:border-orange-500/50 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center">
+                                <i class="fa-brands fa-bitcoin text-white text-xl"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="font-semibold text-white">Cryptocurrency</div>
+                                <div class="text-sm text-slate-400">BTC, ETH, USDT</div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-white transition-colors"></i>
+                    </button>
+                </div>
+                
+                <p class="mt-6 text-center text-sm text-slate-500">
+                    Secure payment processing. 30-day money-back guarantee.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // ==========================================
+        // SCROLL REVEAL OBSERVER
+        // ==========================================
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ==========================================
+        // COUNT-UP ANIMATION
+        // ==========================================
+        function animateCountUp() {
+            document.querySelectorAll('[data-count]').forEach(el => {
+                const target = parseInt(el.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        el.textContent = target + 'K+';
+                        clearInterval(timer);
+                    } else {
+                        el.textContent = Math.floor(current) + 'K+';
+                    }
+                }, 30);
+            });
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCountUp();
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('[data-count]').forEach(el => statsObserver.observe(el));
+
+        // ==========================================
+        // FAQ ACCORDION
+        // ==========================================
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(i => {
+                if (i !== item) i.classList.remove('active');
+            });
+            
+            item.classList.toggle('active');
+        }
+
+        // ==========================================
+        // MOBILE MENU
+        // ==========================================
+        function toggleMobileMenu() {
+            document.getElementById('mobile-overlay').classList.toggle('active');
+            document.getElementById('mobile-panel').classList.toggle('active');
+        }
+
+        // ==========================================
+        // FLOATING CTA (show after scroll)
+        // ==========================================
+        window.addEventListener('scroll', () => {
+            const cta = document.getElementById('floating-cta');
+            if (window.scrollY > 600) {
+                cta.classList.remove('hidden');
+            } else {
+                cta.classList.add('hidden');
+            }
+        });
+
+        // ==========================================
+        // STICKY MOBILE AD (show after 3s)
+        // ==========================================
+        setTimeout(() => {
+            const stickyAd = document.getElementById('sticky-ad');
+            if (window.innerWidth < 768) {
+                stickyAd.classList.add('visible');
+            }
+        }, 3000);
+
+        function closeStickyAd() {
+            document.getElementById('sticky-ad').classList.remove('visible');
+        }
+
+        // ==========================================
+        // MODALS
+        // ==========================================
+        function showUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.remove('hidden');
+        }
+        
+        function closeUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.add('hidden');
+        }
+        
+        // ==========================================
+        // AUTH STATE UI
+        // ==========================================
+        function updateUIForUser(user) {
+            const authSection = document.getElementById('auth-section');
+            const userSection = document.getElementById('user-section');
+            const creditsDisplay = document.getElementById('credits-display');
+            
+            if (user) {
+                authSection.classList.add('hidden');
+                userSection.classList.remove('hidden');
+                userSection.classList.add('flex');
+                
+                document.getElementById('user-name').textContent = user.displayName || user.email?.split('@')[0] || 'User';
+                
+                const usage = usageTracker.getUsage();
+                const limit = usage.plan === 'pro' ? '∞' : '5';
+                const used = usage.plan === 'pro' ? '0' : usage.used;
+                creditsDisplay.textContent = usage.plan === 'pro' ? '∞' : `${used}/${limit}`;
+            } else {
+                authSection.classList.remove('hidden');
+                userSection.classList.add('hidden');
+                userSection.classList.remove('flex');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            auth.onAuthChange(updateUIForUser);
+        });
+    </script>
+</body>
+</html>

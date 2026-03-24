@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>AI Blog Writer | GyaniGuru - SEO Content Generation</title>
+    <meta name="description" content="Generate SEO-optimized blog posts with AI. Create engaging content for your website in seconds.">
+    <link rel="canonical" href="https://technicalboy2023.github.io/gyaniguru/tools/blog.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Blog Writer | GyaniGuru">
+    <meta property="og:description" content="Generate SEO-optimized blog posts with AI">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technicalboy2023.github.io/gyaniguru/tools/blog.html">
+    <meta property="og:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="AI blog writer, SEO content generator, free blog AI, GyaniGuru blog">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+                            800: '#115e59', 900: '#134e4a',
+                        },
+                        accent: { purple: '#8b5cf6', pink: '#ec4899', orange: '#f97316' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-slate-950 text-slate-100">
+    
+    <!-- Navigation (GyaniGuru Branded) -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg text-white">Gyani<span class="text-brand-400">Guru</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="../agents/chat.html" class="text-sm text-slate-400 hover:text-white transition-colors">AI Chat</a>
+                    <a href="../agents/image.html" class="text-sm text-slate-400 hover:text-white transition-colors">Image Gen</a>
+                    <a href="blog.html" class="text-sm text-white font-medium">Blog Writer</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700">
+                        <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
+                        <span id="credit-display" class="text-sm font-medium">5 / 5</span>
+                    </div>
+                    <a href="../index.html#pricing" class="px-4 py-2 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white text-sm font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:scale-105">
+                        Upgrade
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
+        
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-orange to-amber-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/20">
+                <i class="fa-solid fa-blog text-white text-xl"></i>
+            </div>
+            <h1 class="font-display text-3xl font-bold text-white mb-2">AI Blog Writer</h1>
+            <p class="text-slate-400">Generate SEO-optimized blog posts in seconds</p>
+        </div>
+
+        <!-- Top Ad -->
+        <div class="ad-banner-styled mb-8" style="min-height:80px;">
+            <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+            <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="agent-card p-6 mb-8">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">Blog Topic / Title</label>
+                    <input type="text" id="blog-topic" placeholder="e.g., The Benefits of Meditation for Mental Health"
+                        class="input-field">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">Tone</label>
+                        <select id="blog-tone" class="input-field">
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="authoritative">Authoritative</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">Length</label>
+                        <select id="blog-length" class="input-field">
+                            <option value="short">Short (~300 words)</option>
+                            <option value="medium" selected>Medium (~600 words)</option>
+                            <option value="long">Long (~1000 words)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button onclick="blogApp.generate()" id="generate-btn" class="w-full py-4 rounded-xl bg-gradient-to-r from-accent-orange to-amber-500 text-white font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Generate Blog Post
+                </button>
+            </div>
+        </div>
+
+        <!-- Mid Ad -->
+        <div class="ad-inline mb-8" style="min-height:100px;">
+            <script>
+                atOptions = {
+                    'key' : 'a0881adf05133f70c92dbe9314d9f556',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/a0881adf05133f70c92dbe9314d9f556/invoke.js"></script>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-display font-bold text-white">Generated Content</h2>
+                <div class="flex gap-2">
+                    <button onclick="blogApp.copy()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-copy"></i>
+                        Copy
+                    </button>
+                    <button onclick="blogApp.download()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i>
+                        Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="agent-card p-6">
+                <article id="blog-content" class="prose prose-invert max-w-none text-slate-300 leading-relaxed">
+                    <!-- Content will be inserted here -->
+                </article>
+            </div>
+        </div>
+
+        <!-- History -->
+        <div class="mt-12">
+            <h3 class="text-lg font-display font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-slate-500"></i>
+                Recent Blog Posts
+            </h3>
+            <div id="history-list" class="space-y-2">
+                <p class="text-slate-500 text-sm">No blog posts generated yet</p>
+            </div>
+        </div>
+
+        <!-- Bottom Ad -->
+        <div class="ad-native mt-10" style="min-height:100px;">
+            <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+            <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../services/api.js"></script>
+    <script src="../services/credits.js"></script>
+    <script src="../services/history.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>AI Chat | AI Tools Hub - Intelligent Conversations</title>
+    <meta name="description" content="Chat with advanced AI. Get answers, creative writing, code help, and intelligent conversations. Free daily credits available.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Chat | AI Tools Hub">
+    <meta property="og:description" content="Have intelligent conversations with AI">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://username.github.io/repo-name/tools/chat.html">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-slate-900 text-slate-50">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 hover:opacity-80 transition">
+                    <i class="fa-solid fa-bolt text-purple-500 text-2xl"></i>
+                    <span class="text-xl font-bold tracking-tight">AI<span class="text-purple-500">Hub</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="chat.html" class="text-white font-medium border-b-2 border-purple-500 pb-1">AI Chat</a>
+                    <a href="image.html" class="text-slate-300 hover:text-white transition">Image Gen</a>
+                    <a href="blog.html" class="text-slate-300 hover:text-white transition">Blog</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex flex-col items-end">
+                        <span class="text-xs text-slate-400">Credits</span>
+                        <span id="credit-display" class="text-sm font-bold text-purple-400">5 / 5</span>
+                    </div>
+                    <a href="../index.html#pricing" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                        Upgrade
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20 pb-4 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full flex flex-col h-screen">
+        
+        <!-- Header -->
+        <div class="py-4 border-b border-slate-800 mb-4">
+            <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-comments text-purple-500"></i>
+                AI Chat
+            </h1>
+            <p class="text-slate-400 text-sm">Have intelligent conversations with AI</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="flex-1 flex flex-col min-h-0 glass-panel rounded-2xl border border-slate-700 overflow-hidden">
+            
+            <!-- Messages Area -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Welcome Message -->
+                <div class="chat-message assistant">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-robot text-purple-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-200">Hello! I'm your AI assistant. I can help you with:</p>
+                            <ul class="mt-2 text-sm text-slate-400 list-disc list-inside space-y-1">
+                                <li>Answering questions</li>
+                                <li>Creative writing</li>
+                                <li>Code assistance</li>
+                                <li>Analysis and explanations</li>
+                            </ul>
+                            <p class="mt-2 text-slate-200">What would you like to talk about?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="border-t border-slate-700 bg-slate-800/50 p-4">
+                <div class="flex gap-2">
+                    <textarea 
+                        id="chat-input" 
+                        rows="1"
+                        placeholder="Type your message..."
+                        class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 resize-none"
+                        style="min-height: 48px; max-height: 120px;"
+                    ></textarea>
+                    <button 
+                        id="send-btn" 
+                        onclick="chatApp.sendMessage()"
+                        class="bg-purple-600 hover:bg-purple-700 text-white px-6 rounded-lg font-medium transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span class="hidden sm:inline">Send</span>
+                    </button>
+                </div>
+                <div class="flex justify-between items-center mt-2 text-xs text-slate-500">
+                    <span>Press Enter to send, Shift+Enter for new line</span>
+                    <span id="typing-indicator" class="opacity-0 transition-opacity">AI is typing...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Sidebar (Collapsible) -->
+        <div class="mt-4 glass-panel rounded-xl p-4 border border-slate-700">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-semibold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
+                    Recent Chats
+                </h3>
+                <button onclick="chatApp.clearHistory()" class="text-xs text-slate-400 hover:text-red-400 transition">
+                    Clear
+                </button>
+            </div>
+            <div id="history-list" class="space-y-2 max-h-32 overflow-y-auto">
+                <p class="text-slate-500 text-sm text-center py-2">No history yet</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../services/api.js"></script>
+    <script src="../services/credits.js"></script>
+    <script src="../services/history.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>

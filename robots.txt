@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /agents/
+Allow: /tools/
+
+Disallow: /js/config.js
+Disallow: /*.json$
+
+Sitemap: https://technicalboy2023.github.io/gyaniguru/sitemap.xml

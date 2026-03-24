@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat | GyaniGuru</title>
+    <meta name="description" content="Chat with our AI assistant. Get answers, creative writing, and intelligent conversations.">
+    <link rel="canonical" href="https://technicalboy2023.github.io/gyaniguru/agents/chat.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technicalboy2023.github.io/gyaniguru/agents/chat.html">
+    <meta property="og:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="AI chat, free AI assistant, GyaniGuru chat, intelligent conversations">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+                            800: '#115e59', 900: '#134e4a',
+                        },
+                        accent: { purple: '#8b5cf6', pink: '#ec4899' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg text-white">Gyani<span class="text-brand-400">Guru</span></span>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700">
+                        <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
+                        <span id="credits-display" class="text-sm font-medium">5/5</span>
+                    </div>
+                    <a href="../index.html" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="hidden sm:inline">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <main class="pt-20 pb-12 min-h-screen flex flex-col">
+        <div class="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-6">
+            
+            <!-- Main Chat Area -->
+            <div class="flex-1 flex flex-col min-w-0">
+                
+                <!-- Header -->
+                <div class="text-center py-6">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-comments text-white text-xl"></i>
+                    </div>
+                    <h1 class="font-display text-2xl font-bold text-white mb-1">AI Chat</h1>
+                    <p class="text-slate-400 text-sm">Ask anything. Get intelligent answers instantly.</p>
+                </div>
+
+                <!-- Top Ad -->
+                <div class="ad-banner-styled mb-4" style="min-height:70px;">
+                    <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+                    <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+                </div>
+
+                <!-- Suggested Prompts -->
+                <div class="mb-4" id="suggestions-section">
+                    <p class="text-xs text-slate-500 mb-2 font-medium uppercase tracking-wider">Try asking</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="prompt-chip" onclick="usePrompt(this)">
+                            <i class="fa-solid fa-lightbulb text-yellow-400"></i>
+                            Explain quantum computing simply
+                        </button>
+                        <button class="prompt-chip" onclick="usePrompt(this)">
+                            <i class="fa-solid fa-code text-brand-400"></i>
+                            Write a Python sorting algorithm
+                        </button>
+                        <button class="prompt-chip" onclick="usePrompt(this)">
+                            <i class="fa-solid fa-pen-fancy text-accent-purple"></i>
+                            Write a short poem about nature
+                        </button>
+                        <button class="prompt-chip" onclick="usePrompt(this)">
+                            <i class="fa-solid fa-briefcase text-orange-400"></i>
+                            Help me write a professional email
+                        </button>
+                        <button class="prompt-chip" onclick="usePrompt(this)">
+                            <i class="fa-solid fa-utensils text-pink-400"></i>
+                            Suggest a healthy dinner recipe
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div class="agent-card flex-1 flex flex-col mb-4" style="min-height: 400px;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-lg font-semibold text-white">Conversation</h2>
+                            <span id="status-badge" class="status-badge status-idle">
+                                <i class="fa-solid fa-circle text-xs"></i> Idle
+                            </span>
+                        </div>
+                        <button onclick="clearChat()" class="text-sm text-slate-500 hover:text-white transition-colors flex items-center gap-1">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                            <span class="hidden sm:inline">Clear</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Chat Messages -->
+                    <div id="chat-messages" class="flex-1 space-y-4 mb-4 overflow-y-auto pr-1" style="max-height: 500px;">
+                        <div class="flex items-start gap-3" style="animation: fadeInUp 0.4s ease-out;">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-500/20">
+                                <i class="fa-solid fa-robot text-white text-xs"></i>
+                            </div>
+                            <div class="bg-slate-800/80 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                                <p class="text-slate-300 text-sm">Hello! I'm your AI assistant. How can I help you today? 🚀</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Area -->
+                    <div class="border-t border-slate-800 pt-4">
+                        <div class="flex gap-3">
+                            <textarea 
+                                id="chat-input" 
+                                rows="1"
+                                class="flex-1 input-field resize-none"
+                                placeholder="Type your message..."
+                                oninput="autoResize(this)"
+                            ></textarea>
+                            <button 
+                                id="send-btn"
+                                onclick="sendMessage()"
+                                class="px-5 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all disabled:opacity-50 hover:scale-105"
+                            >
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between mt-2 text-xs text-slate-500">
+                            <span>Press Enter to send, Shift+Enter for new line</span>
+                            <span id="char-count">0 chars</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Actions -->
+                <div id="output-actions" class="flex justify-end gap-3 opacity-0 pointer-events-none transition-opacity">
+                    <button onclick="copyLastResponse()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-copy"></i> Copy Last
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar (Desktop) -->
+            <div class="hidden lg:block w-72 flex-shrink-0 space-y-4 pt-6">
+                <!-- Sidebar Ad -->
+                <div class="ad-sidebar" style="min-height:250px;">
+                    <script>
+                        atOptions = {
+                            'key' : 'a0881adf05133f70c92dbe9314d9f556',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/a0881adf05133f70c92dbe9314d9f556/invoke.js"></script>
+                </div>
+
+                <!-- Quick Tips Card -->
+                <div class="glass-card p-5" style="border-radius: 1rem;">
+                    <h3 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-yellow-400"></i>
+                        Chat Tips
+                    </h3>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-brand-500 mt-0.5 text-[10px]"></i>
+                            Be specific for better results
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-brand-500 mt-0.5 text-[10px]"></i>
+                            Ask follow-up questions
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-brand-500 mt-0.5 text-[10px]"></i>
+                            Request different formats
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-brand-500 mt-0.5 text-[10px]"></i>
+                            Try "Explain like I'm 5"
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Another Sidebar Ad -->
+                <div class="ad-sidebar" style="min-height:200px;">
+                    <script>
+                        atOptions = {
+                            'key' : 'a0881adf05133f70c92dbe9314d9f556',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/a0881adf05133f70c92dbe9314d9f556/invoke.js"></script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Ad (Mobile) -->
+        <div class="lg:hidden max-w-4xl mx-auto w-full px-4 mt-6">
+            <div class="ad-banner-styled" style="min-height:80px;">
+                <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+                <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <script src="../js/config.js"></script>
+    
+    <script>
+        // ==========================================
+        // INLINE FIREBASE & AUTH (No external dependency)
+        // ==========================================
+        
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
+
+        let app = null;
+        let authInstance = null;
+        let currentUser = null;
+        const authObservers = [];
+
+        function initFirebase() {
+            if (typeof firebase === 'undefined') {
+                console.log('Firebase SDK not loaded, using local mode');
+                loadLocalUser();
+                return;
+            }
+            try {
+                if (!firebase.apps.length) {
+                    app = firebase.initializeApp(firebaseConfig);
+                } else {
+                    app = firebase.app();
+                }
+                authInstance = firebase.auth();
+                authInstance.onAuthStateChanged((user) => {
+                    currentUser = user;
+                    notifyAuthObservers(user);
+                });
+            } catch (error) {
+                console.error('Firebase error:', error);
+                loadLocalUser();
+            }
+        }
+
+        function loadLocalUser() {
+            const data = localStorage.getItem('gyaniguru_user');
+            if (data) {
+                currentUser = JSON.parse(data);
+                notifyAuthObservers(currentUser);
+            }
+        }
+
+        function notifyAuthObservers(user) {
+            authObservers.forEach(cb => { try { cb(user); } catch(e) {} });
+        }
+
+        function onAuthChange(callback) {
+            authObservers.push(callback);
+            callback(currentUser);
+        }
+
+        function getCurrentUser() { return currentUser; }
+
+        // Usage Tracker
+        const usageTracker = {
+            getUsage() {
+                const user = getCurrentUser();
+                const today = new Date().toDateString();
+                const plan = user?.plan || localStorage.getItem('gyaniguru_plan') || 'free';
+                const storageKey = user ? `gyaniguru_usage_${user.uid}` : 'gyaniguru_usage_anonymous';
+                let data = JSON.parse(localStorage.getItem(storageKey)) || {};
+                if (data.date !== today) {
+                    data = { date: today, used: 0, plan: plan };
+                    localStorage.setItem(storageKey, JSON.stringify(data));
+                }
+                return { ...data, plan };
+            },
+            recordUsage() {
+                const usage = this.getUsage();
+                const user = getCurrentUser();
+                const storageKey = user ? `gyaniguru_usage_${user.uid}` : 'gyaniguru_usage_anonymous';
+                usage.used++;
+                localStorage.setItem(storageKey, JSON.stringify(usage));
+                return usage;
+            },
+            canUse() {
+                const usage = this.getUsage();
+                if (usage.plan === 'pro') return true;
+                return usage.used < 5;
+            },
+            getRemaining() {
+                const usage = this.getUsage();
+                if (usage.plan === 'pro') return Infinity;
+                return Math.max(0, 5 - usage.used);
+            }
+        };
+
+        // ==========================================
+        // API SERVICE
+        // ==========================================
+        
+        async function callAgent(agentId, input) {
+            const agent = CONFIG.agents[agentId];
+            if (!agent) throw new Error('Agent not found');
+            
+            const url = agent.webhookUrl;
+            if (!url || url.includes('your-n8n-instance')) {
+                throw new Error('Please configure your n8n webhook in config.js');
+            }
+            
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), 60000);
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ agent: agentId, input: input, timestamp: new Date().toISOString() }),
+                signal: controller.signal
+            });
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            
+            const data = await response.json();
+            const fields = ['response', 'output', 'result', 'text', 'message', 'content'];
+            for (const field of fields) {
+                if (data[field]) return { type: 'text', content: String(data[field]) };
+            }
+            return { type: 'text', content: typeof data === 'string' ? data : JSON.stringify(data, null, 2) };
+        }
+
+        // ==========================================
+        // UI UTILITIES
+        // ==========================================
+        
+        function updateStatus(element, status) {
+            if (!element) return;
+            const classes = { idle: 'status-idle', running: 'status-running', success: 'status-success', error: 'status-error' };
+            Object.values(classes).forEach(c => element.classList.remove(c));
+            element.classList.add(classes[status] || classes.idle);
+            const icons = { idle: '<i class="fa-solid fa-circle text-xs"></i>', running: '<span class="spinner spinner-sm"></span>', success: '<i class="fa-solid fa-check text-xs"></i>', error: '<i class="fa-solid fa-xmark text-xs"></i>' };
+            const texts = { idle: 'Idle', running: 'Running', success: 'Completed', error: 'Error' };
+            element.innerHTML = `${icons[status] || icons.idle} ${texts[status] || status}`;
+        }
+
+        function formatText(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+)`/g, '<code class="bg-slate-800 px-1.5 py-0.5 rounded text-brand-300 font-mono text-sm">$1</code>')
+                .replace(/\n/g, '<br>');
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 400) + 'px';
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied to clipboard', 'success');
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Copied to clipboard', 'success');
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.querySelector('.toast-container') || (() => {
+                const c = document.createElement('div');
+                c.className = 'toast-container';
+                document.body.appendChild(c);
+                return c;
+            })();
+            const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+            const colors = { success: 'text-green-400', error: 'text-red-400', warning: 'text-yellow-400', info: 'text-brand-400' };
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type]} ${colors[type]} text-lg"></i>
+                <div class="flex-1"><p class="text-sm font-medium text-white">${message}</p></div>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 4000);
+        }
+
+        // ==========================================
+        // CHAT APP STATE & FUNCTIONS
+        // ==========================================
+        
+        let lastResponse = '';
+        let isProcessing = false;
+        
+        function updateCredits() {
+            const remaining = usageTracker.getRemaining();
+            const el = document.getElementById('credits-display');
+            if (el) el.textContent = remaining === Infinity ? '∞' : `${remaining}/5`;
+        }
+
+        function usePrompt(btn) {
+            const text = btn.textContent.trim();
+            const input = document.getElementById('chat-input');
+            input.value = text;
+            input.focus();
+            autoResize(input);
+            // Hide suggestions after use
+            document.getElementById('suggestions-section').style.display = 'none';
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const messagesContainer = document.getElementById('chat-messages');
+            const statusBadge = document.getElementById('status-badge');
+            const charCount = document.getElementById('char-count');
+            const outputActions = document.getElementById('output-actions');
+            
+            const message = input.value.trim();
+            if (!message || isProcessing) return;
+            
+            if (!usageTracker.canUse()) {
+                showToast('Daily limit reached. Upgrade to Pro!', 'warning');
+                return;
+            }
+
+            // Hide suggestions
+            const sugSection = document.getElementById('suggestions-section');
+            if (sugSection) sugSection.style.display = 'none';
+            
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'flex items-start gap-3 justify-end';
+            userDiv.style.animation = 'fadeInUp 0.3s ease-out';
+            userDiv.innerHTML = `
+                <div class="bg-gradient-to-r from-brand-600 to-accent-purple rounded-2xl rounded-tr-sm px-4 py-3 max-w-[80%] shadow-lg shadow-brand-500/10">
+                    <p class="text-white text-sm">${escapeHtml(message)}</p>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-user text-slate-300 text-xs"></i>
+                </div>
+            `;
+            messagesContainer.appendChild(userDiv);
+            
+            input.value = '';
+            input.style.height = 'auto';
+            if (charCount) charCount.textContent = '0 chars';
+            
+            isProcessing = true;
+            sendBtn.disabled = true;
+            updateStatus(statusBadge, 'running');
+            usageTracker.recordUsage();
+            updateCredits();
+            
+            // Typing indicator
+            const typingId = 'typing-' + Date.now();
+            const typingDiv = document.createElement('div');
+            typingDiv.id = typingId;
+            typingDiv.className = 'flex items-start gap-3';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-robot text-white text-xs"></i>
+                </div>
+                <div class="bg-slate-800/80 rounded-2xl rounded-tl-sm px-4 py-3">
+                    <div class="flex gap-1.5">
+                        <span class="w-2 h-2 bg-brand-400 rounded-full animate-bounce"></span>
+                        <span class="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+                        <span class="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            try {
+                const result = await callAgent('chat', message);
+                document.getElementById(typingId)?.remove();
+                
+                lastResponse = result.content;
+                const assistantDiv = document.createElement('div');
+                assistantDiv.className = 'flex items-start gap-3';
+                assistantDiv.style.animation = 'fadeInUp 0.4s ease-out';
+                assistantDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-robot text-white text-xs"></i>
+                    </div>
+                    <div class="bg-slate-800/80 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                        <div class="text-slate-300 text-sm leading-relaxed">${formatText(result.content)}</div>
+                        <button onclick="copyToClipboard('${result.content.replace(/'/g, "\\'").replace(/\n/g, "\\n")}')" class="mt-2 text-xs text-slate-500 hover:text-brand-400 transition-colors">
+                            <i class="fa-regular fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                `;
+                messagesContainer.appendChild(assistantDiv);
+                
+                updateStatus(statusBadge, 'success');
+                if (outputActions) { outputActions.style.opacity = '1'; outputActions.style.pointerEvents = 'auto'; }
+                showToast('Response received', 'success');
+                
+            } catch (error) {
+                document.getElementById(typingId)?.remove();
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'flex items-start gap-3';
+                errorDiv.style.animation = 'fadeInUp 0.3s ease-out';
+                errorDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-exclamation text-red-400 text-xs"></i>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/30 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                        <p class="text-red-300 text-sm">${escapeHtml(error.message || 'Failed to get response')}</p>
+                    </div>
+                `;
+                messagesContainer.appendChild(errorDiv);
+                updateStatus(statusBadge, 'error');
+                showToast(error.message || 'Failed to get response', 'error');
+            } finally {
+                isProcessing = false;
+                sendBtn.disabled = false;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                setTimeout(() => updateStatus(statusBadge, 'idle'), 2000);
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function copyLastResponse() { if (lastResponse) copyToClipboard(lastResponse); }
+
+        function clearChat() {
+            if (!confirm('Clear all messages?')) return;
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = `
+                <div class="flex items-start gap-3" style="animation: fadeInUp 0.4s ease-out;">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-robot text-white text-xs"></i>
+                    </div>
+                    <div class="bg-slate-800/80 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                        <p class="text-slate-300 text-sm">Hello! I'm your AI assistant. How can I help you today? 🚀</p>
+                    </div>
+                </div>
+            `;
+            lastResponse = '';
+            const actions = document.getElementById('output-actions');
+            if (actions) { actions.style.opacity = '0'; actions.style.pointerEvents = 'none'; }
+            // Show suggestions again
+            const sugSection = document.getElementById('suggestions-section');
+            if (sugSection) sugSection.style.display = '';
+        }
+
+        // Handle Enter key
+        document.addEventListener('DOMContentLoaded', () => {
+            initFirebase();
+            updateCredits();
+            
+            const input = document.getElementById('chat-input');
+            if (input) {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+                input.addEventListener('input', () => {
+                    const charCount = document.getElementById('char-count');
+                    if (charCount) charCount.textContent = `${input.value.length} chars`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

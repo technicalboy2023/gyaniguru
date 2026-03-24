@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generator | GyaniGuru</title>
+    <meta name="description" content="Generate stunning AI images from text descriptions. Create art, illustrations, and visuals instantly.">
+    <link rel="canonical" href="https://technicalboy2023.github.io/gyaniguru/agents/image.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technicalboy2023.github.io/gyaniguru/agents/image.html">
+    <meta property="og:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://technicalboy2023.github.io/gyaniguru/og-image.jpg">
+    <meta name="keywords" content="AI image generator, free AI images, GyaniGuru image, text to image">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+                            800: '#115e59', 900: '#134e4a',
+                        },
+                        accent: { purple: '#8b5cf6', pink: '#ec4899' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-purple flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-white text-sm"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg text-white">Gyani<span class="text-brand-400">Guru</span></span>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700">
+                        <i class="fa-solid fa-coins text-yellow-400 text-sm"></i>
+                        <span id="credits-display" class="text-sm font-medium">5/5</span>
+                    </div>
+                    <a href="../index.html" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="hidden sm:inline">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-12 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+            <!-- Header -->
+            <div class="text-center py-6">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center mx-auto mb-3 shadow-lg shadow-accent-purple/20">
+                    <i class="fa-solid fa-image text-white text-xl"></i>
+                </div>
+                <h1 class="font-display text-2xl font-bold text-white mb-1">Image Generator</h1>
+                <p class="text-slate-400 text-sm">Describe an image and watch it come to life.</p>
+            </div>
+
+            <!-- Top Ad -->
+            <div class="ad-banner-styled mb-6" style="min-height:70px;">
+                <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+                <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+            </div>
+
+            <!-- Generator Interface -->
+            <div class="grid lg:grid-cols-2 gap-6">
+                
+                <!-- Input Section -->
+                <div class="space-y-6">
+                    <div class="agent-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-accent-purple"></i>
+                                Prompt
+                            </h2>
+                            <span id="status-badge" class="status-badge status-idle">
+                                <i class="fa-solid fa-circle text-xs"></i> Idle
+                            </span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <textarea 
+                                id="prompt-input" 
+                                rows="4"
+                                class="input-field"
+                                placeholder="A serene mountain landscape at sunset with a lake reflection, digital art style..."
+                                oninput="autoResize(this)"
+                            ></textarea>
+                            
+                            <!-- Style Selection with Previews -->
+                            <div>
+                                <label class="text-xs text-slate-500 font-medium uppercase tracking-wider mb-2 block">Style</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button onclick="selectStyle(this, '')" class="style-option active px-3 py-2 rounded-lg bg-slate-800 border border-brand-500/50 text-sm text-white font-medium transition-all hover:border-brand-500">
+                                        <i class="fa-solid fa-magic text-brand-400 mr-1"></i>Default
+                                    </button>
+                                    <button onclick="selectStyle(this, 'photorealistic')" class="style-option px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-400 font-medium transition-all hover:border-slate-500">
+                                        <i class="fa-solid fa-camera text-blue-400 mr-1"></i>Photo
+                                    </button>
+                                    <button onclick="selectStyle(this, 'digital-art')" class="style-option px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-400 font-medium transition-all hover:border-slate-500">
+                                        <i class="fa-solid fa-palette text-purple-400 mr-1"></i>Digital
+                                    </button>
+                                    <button onclick="selectStyle(this, 'oil-painting')" class="style-option px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-400 font-medium transition-all hover:border-slate-500">
+                                        <i class="fa-solid fa-brush text-amber-400 mr-1"></i>Oil Paint
+                                    </button>
+                                    <button onclick="selectStyle(this, 'anime')" class="style-option px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-400 font-medium transition-all hover:border-slate-500">
+                                        <i class="fa-solid fa-star text-pink-400 mr-1"></i>Anime
+                                    </button>
+                                    <button onclick="selectStyle(this, '3d-render')" class="style-option px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-400 font-medium transition-all hover:border-slate-500">
+                                        <i class="fa-solid fa-cube text-cyan-400 mr-1"></i>3D
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-xs text-slate-500 font-medium uppercase tracking-wider mb-2 block">Size</label>
+                                <select id="size-select" class="input-field">
+                                    <option value="1024x1024">1024 × 1024 (Square)</option>
+                                    <option value="512x512">512 × 512 (Small)</option>
+                                </select>
+                            </div>
+                            
+                            <button 
+                                id="generate-btn"
+                                onclick="generateImage()"
+                                class="w-full py-4 rounded-xl bg-gradient-to-r from-accent-purple to-accent-pink text-white font-semibold hover:shadow-lg hover:shadow-accent-purple/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-[1.02]"
+                            >
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                Generate Image
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Prompt Inspiration -->
+                    <div class="glass-card p-5" style="border-radius: 1rem;">
+                        <h3 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-yellow-400"></i>
+                            Try these prompts
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="useImagePrompt('A cyberpunk city at night with neon lights reflecting on wet streets')" class="prompt-chip text-xs">
+                                🌃 Cyberpunk city
+                            </button>
+                            <button onclick="useImagePrompt('A magical forest with glowing mushrooms and fairy lights')" class="prompt-chip text-xs">
+                                🍄 Magic forest
+                            </button>
+                            <button onclick="useImagePrompt('An astronaut floating in space with Earth in the background')" class="prompt-chip text-xs">
+                                🚀 Astronaut
+                            </button>
+                            <button onclick="useImagePrompt('A cozy cabin in snowy mountains with warm light from windows')" class="prompt-chip text-xs">
+                                🏔️ Cozy cabin
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad (Mobile hidden, shown inline) -->
+                    <div class="ad-native lg:hidden" style="min-height:100px;">
+                        <script>
+                            atOptions = {
+                                'key' : 'a0881adf05133f70c92dbe9314d9f556',
+                                'format' : 'iframe',
+                                'height' : 250,
+                                'width' : 300,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/a0881adf05133f70c92dbe9314d9f556/invoke.js"></script>
+                    </div>
+                </div>
+                
+                <!-- Output Section -->
+                <div class="space-y-6">
+                    <div class="agent-card h-full flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-white">Result</h2>
+                            <div id="output-actions" class="flex gap-2 opacity-0 pointer-events-none transition-opacity">
+                                <a id="download-link" href="#" download class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors" title="Download">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div id="output-container" class="flex-1 min-h-[400px]">
+                            <!-- Placeholder -->
+                            <div id="image-placeholder" class="h-full flex flex-col items-center justify-center text-slate-600 p-8 border-2 border-dashed border-slate-800 rounded-xl bg-slate-900/30">
+                                <i class="fa-solid fa-image text-4xl mb-4 text-slate-700"></i>
+                                <p class="text-slate-500 text-center text-sm">Your generated image will appear here</p>
+                                <p class="text-slate-600 text-xs mt-2">Choose a style and describe your vision</p>
+                            </div>
+                            
+                            <!-- Loading State -->
+                            <div id="image-loading" class="hidden h-full flex flex-col items-center justify-center text-slate-600 p-8 border-2 border-dashed border-accent-purple/30 rounded-xl bg-slate-900/30">
+                                <span class="spinner spinner-lg mb-4" style="border-top-color: #8b5cf6;"></span>
+                                <p class="text-slate-400 animate-pulse font-medium">Creating your masterpiece...</p>
+                                <p class="text-slate-600 text-sm mt-2">This may take 10-30 seconds</p>
+                                <div class="w-48 h-1 bg-slate-800 rounded-full mt-4 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-accent-purple to-accent-pink shimmer rounded-full" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Image Result -->
+                            <div id="image-result" class="hidden rounded-xl overflow-hidden border border-slate-700 shadow-2xl shadow-accent-purple/10">
+                                <img id="generated-image" src="" alt="Generated image" class="w-full h-auto">
+                            </div>
+                            
+                            <!-- Error State -->
+                            <div id="image-error" class="hidden h-full flex flex-col items-center justify-center text-slate-600 p-8 border-2 border-dashed border-red-500/30 rounded-xl bg-red-500/5">
+                                <i class="fa-solid fa-circle-exclamation text-4xl mb-4 text-red-400"></i>
+                                <p class="text-red-300 text-center" id="error-message">Failed to generate image</p>
+                                <button onclick="retryGeneration()" class="mt-4 px-4 py-2 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-colors text-sm">
+                                    Try Again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Ad -->
+            <div class="ad-inline mt-8" style="min-height:100px;">
+                <script async="async" data-cfasync="false" src="https://pl28972503.profitablecpmratenetwork.com/0430d347c4586a8600f531d86650c4a2/invoke.js"></script>
+                <div id="container-0430d347c4586a8600f531d86650c4a2"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <script src="../js/config.js"></script>
+    
+    <script>
+        // ==========================================
+        // INLINE FIREBASE & AUTH
+        // ==========================================
+        
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
+
+        let app = null;
+        let authInstance = null;
+        let currentUser = null;
+
+        function initFirebase() {
+            if (typeof firebase === 'undefined') {
+                console.log('Firebase SDK not loaded, using local mode');
+                loadLocalUser();
+                return;
+            }
+            try {
+                if (!firebase.apps.length) { app = firebase.initializeApp(firebaseConfig); } else { app = firebase.app(); }
+                authInstance = firebase.auth();
+                authInstance.onAuthStateChanged((user) => { currentUser = user; });
+            } catch (error) { console.error('Firebase error:', error); loadLocalUser(); }
+        }
+
+        function loadLocalUser() {
+            const data = localStorage.getItem('gyaniguru_user');
+            if (data) currentUser = JSON.parse(data);
+        }
+
+        function getCurrentUser() { return currentUser; }
+
+        // Usage Tracker
+        const usageTracker = {
+            getUsage() {
+                const user = getCurrentUser();
+                const today = new Date().toDateString();
+                const plan = user?.plan || localStorage.getItem('gyaniguru_plan') || 'free';
+                const storageKey = user ? `gyaniguru_usage_${user.uid}` : 'gyaniguru_usage_anonymous';
+                let data = JSON.parse(localStorage.getItem(storageKey)) || {};
+                if (data.date !== today) { data = { date: today, used: 0, plan: plan }; localStorage.setItem(storageKey, JSON.stringify(data)); }
+                return { ...data, plan };
+            },
+            recordUsage() {
+                const usage = this.getUsage();
+                const user = getCurrentUser();
+                const storageKey = user ? `gyaniguru_usage_${user.uid}` : 'gyaniguru_usage_anonymous';
+                usage.used++;
+                localStorage.setItem(storageKey, JSON.stringify(usage));
+                return usage;
+            },
+            canUse() { const usage = this.getUsage(); if (usage.plan === 'pro') return true; return usage.used < 5; },
+            getRemaining() { const usage = this.getUsage(); if (usage.plan === 'pro') return Infinity; return Math.max(0, 5 - usage.used); }
+        };
+
+        // ==========================================
+        // API SERVICE
+        // ==========================================
+        
+        async function callAgent(agentId, input) {
+            const agent = CONFIG.agents[agentId];
+            if (!agent) throw new Error('Agent not found');
+            const url = agent.webhookUrl;
+            if (!url || url.includes('your-n8n-instance')) throw new Error('Please configure your n8n webhook in config.js');
+            
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), 60000);
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ agent: agentId, input: input, timestamp: new Date().toISOString() }),
+                signal: controller.signal
+            });
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            const data = await response.json();
+            
+            if (data.image_url) return { type: 'image', url: data.image_url };
+            if (data.url) return { type: 'image', url: data.url };
+            if (data.image) return { type: 'image', url: data.image };
+            
+            const fields = ['response', 'output', 'result', 'text', 'message'];
+            for (const field of fields) { if (data[field]) return { type: 'text', content: String(data[field]) }; }
+            return { type: 'text', content: JSON.stringify(data) };
+        }
+
+        // ==========================================
+        // UI UTILITIES
+        // ==========================================
+        
+        function updateStatus(element, status) {
+            if (!element) return;
+            const classes = { idle: 'status-idle', running: 'status-running', success: 'status-success', error: 'status-error' };
+            Object.values(classes).forEach(c => element.classList.remove(c));
+            element.classList.add(classes[status] || classes.idle);
+            const icons = { idle: '<i class="fa-solid fa-circle text-xs"></i>', running: '<span class="spinner spinner-sm"></span>', success: '<i class="fa-solid fa-check text-xs"></i>', error: '<i class="fa-solid fa-xmark text-xs"></i>' };
+            const texts = { idle: 'Idle', running: 'Running', success: 'Completed', error: 'Error' };
+            element.innerHTML = `${icons[status] || icons.idle} ${texts[status] || status}`;
+        }
+
+        function autoResize(textarea) { textarea.style.height = 'auto'; textarea.style.height = Math.min(textarea.scrollHeight, 400) + 'px'; }
+
+        function showToast(message, type = 'info') {
+            const container = document.querySelector('.toast-container') || (() => { const c = document.createElement('div'); c.className = 'toast-container'; document.body.appendChild(c); return c; })();
+            const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+            const colors = { success: 'text-green-400', error: 'text-red-400', warning: 'text-yellow-400', info: 'text-brand-400' };
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type]} ${colors[type]} text-lg"></i><div class="flex-1"><p class="text-sm font-medium text-white">${message}</p></div><button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 4000);
+        }
+
+        // ==========================================
+        // IMAGE GENERATOR STATE & FUNCTIONS
+        // ==========================================
+        
+        let generatedImageUrl = '';
+        let isProcessing = false;
+        let selectedStyle = '';
+        
+        function updateCredits() {
+            const remaining = usageTracker.getRemaining();
+            const el = document.getElementById('credits-display');
+            if (el) el.textContent = remaining === Infinity ? '∞' : `${remaining}/5`;
+        }
+
+        function selectStyle(btn, style) {
+            selectedStyle = style;
+            document.querySelectorAll('.style-option').forEach(el => {
+                el.classList.remove('active');
+                el.classList.remove('border-brand-500/50');
+                el.classList.add('border-slate-700');
+                el.classList.remove('text-white');
+                el.classList.add('text-slate-400');
+            });
+            btn.classList.add('active');
+            btn.classList.add('border-brand-500/50');
+            btn.classList.remove('border-slate-700');
+            btn.classList.add('text-white');
+            btn.classList.remove('text-slate-400');
+        }
+
+        function useImagePrompt(text) {
+            const input = document.getElementById('prompt-input');
+            input.value = text;
+            input.focus();
+            autoResize(input);
+        }
+
+        function showState(state) {
+            const states = ['image-placeholder', 'image-loading', 'image-result', 'image-error'];
+            states.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+            const target = document.getElementById('image-' + state);
+            if (target) target.classList.remove('hidden');
+        }
+
+        async function generateImage() {
+            const promptInput = document.getElementById('prompt-input');
+            const generateBtn = document.getElementById('generate-btn');
+            const statusBadge = document.getElementById('status-badge');
+            const outputActions = document.getElementById('output-actions');
+            const downloadLink = document.getElementById('download-link');
+            
+            const prompt = promptInput ? promptInput.value.trim() : '';
+            if (!prompt) { showToast('Please enter a description', 'warning'); if (promptInput) promptInput.focus(); return; }
+            if (!usageTracker.canUse()) { showToast('Daily limit reached. Upgrade to Pro!', 'warning'); return; }
+            
+            let enhancedPrompt = prompt;
+            if (selectedStyle) enhancedPrompt += `, ${selectedStyle.replace('-', ' ')} style`;
+            
+            isProcessing = true;
+            if (generateBtn) generateBtn.disabled = true;
+            updateStatus(statusBadge, 'running');
+            showState('loading');
+            if (outputActions) { outputActions.style.opacity = '0'; outputActions.style.pointerEvents = 'none'; }
+            
+            usageTracker.recordUsage();
+            updateCredits();
+            
+            try {
+                const result = await callAgent('image', enhancedPrompt);
+                
+                if (result.type === 'image' && result.url) {
+                    generatedImageUrl = result.url;
+                    const img = new Image();
+                    img.onload = () => {
+                        const imgEl = document.getElementById('generated-image');
+                        if (imgEl) imgEl.src = result.url;
+                        showState('result');
+                        if (downloadLink) { downloadLink.href = result.url; downloadLink.download = `gyaniguru-${Date.now()}.png`; }
+                        if (outputActions) { outputActions.style.opacity = '1'; outputActions.style.pointerEvents = 'auto'; }
+                        updateStatus(statusBadge, 'success');
+                        showToast('Image generated successfully!', 'success');
+                    };
+                    img.onerror = () => { throw new Error('Failed to load generated image'); };
+                    img.src = result.url;
+                } else {
+                    throw new Error('Invalid response: no image URL found');
+                }
+            } catch (error) {
+                console.error('Image generation error:', error);
+                const errorMsg = document.getElementById('error-message');
+                if (errorMsg) errorMsg.textContent = error.message || 'Failed to generate image';
+                showState('error');
+                updateStatus(statusBadge, 'error');
+                showToast(error.message || 'Failed to generate image', 'error');
+            } finally {
+                isProcessing = false;
+                if (generateBtn) generateBtn.disabled = false;
+                setTimeout(() => updateStatus(statusBadge, 'idle'), 2000);
+            }
+        }
+
+        function retryGeneration() { showState('placeholder'); generateImage(); }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => { initFirebase(); updateCredits(); });
+    </script>
+</body>
+</html>

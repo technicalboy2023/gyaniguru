@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>AI Image Generator | AI Tools Hub - Temporarily Unavailable</title>
+    <meta name="description" content="AI Image Generator is temporarily unavailable. Check back soon for AI-powered image creation.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Image Generator | AI Tools Hub">
+    <meta property="og:description" content="AI image generation temporarily unavailable">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-slate-900 text-slate-50">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 hover:opacity-80 transition">
+                    <i class="fa-solid fa-bolt text-pink-500 text-2xl"></i>
+                    <span class="text-xl font-bold tracking-tight">AI<span class="text-pink-500">Hub</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="chat.html" class="text-slate-300 hover:text-white transition">AI Chat</a>
+                    <a href="image.html" class="text-white font-medium border-b-2 border-pink-500 pb-1">Image Gen</a>
+                    <a href="blog.html" class="text-slate-300 hover:text-white transition">Blog</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex flex-col items-end">
+                        <span class="text-xs text-slate-400">Credits</span>
+                        <span id="credit-display" class="text-sm font-bold text-pink-400">5 / 5</span>
+                    </div>
+                    <a href="../index.html#pricing" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                        Upgrade
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+        
+        <!-- Disabled State -->
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-slate-700">
+                <i class="fa-solid fa-screwdriver-wrench text-slate-500 text-4xl"></i>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-white mb-4">Image Generator Unavailable</h1>
+            <p class="text-slate-400 text-lg mb-8 max-w-md mx-auto">
+                Our image generation service is temporarily down for maintenance. We're working to restore it as soon as possible.
+            </p>
+            
+            <div class="glass-panel rounded-2xl p-8 border border-slate-700 max-w-lg mx-auto mb-8">
+                <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-clock text-yellow-500"></i>
+                    Expected Return
+                </h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    We expect to have image generation restored within 24-48 hours. Thank you for your patience.
+                </p>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-pink-500 to-purple-500 w-3/4 animate-pulse"></div>
+                </div>
+                <p class="text-xs text-slate-500 mt-2 text-right">75% Complete</p>
+            </div>
+            
+            <div class="flex justify-center gap-4">
+                <a href="chat.html" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-comments"></i>
+                    Try AI Chat Instead
+                </a>
+                <button onclick="notifyWhenReady()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition border border-slate-700">
+                    Notify Me When Ready
+                </button>
+            </div>
+        </div>
+
+        <!-- Future UI Preview (Hidden/Disabled) -->
+        <div class="opacity-50 pointer-events-none blur-sm">
+            <div class="glass-panel rounded-2xl p-6 border border-slate-700">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-image text-pink-500"></i>
+                    Image Generator Preview
+                </h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-1">Prompt</label>
+                        <input type="text" disabled placeholder="A futuristic city at sunset..." 
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-500 cursor-not-allowed">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Style</label>
+                            <select disabled class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-500 cursor-not-allowed">
+                                <option>Realistic</option>
+                                <option>Artistic</option>
+                                <option>Anime</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Size</label>
+                            <select disabled class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-500 cursor-not-allowed">
+                                <option>1024x1024</option>
+                                <option>512x512</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button disabled class="w-full bg-slate-700 text-slate-500 font-bold py-3 rounded-lg cursor-not-allowed">
+                        Generate Image
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../services/credits.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/image.js"></script>
+</body>
+</html>
