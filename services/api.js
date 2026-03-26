@@ -42,7 +42,10 @@ class ApiService {
         return {
             options: {
                 method: 'POST',
-                headers: { ...this.config.headers },
+                headers: { 
+                    ...this.config.headers,
+                    'ngrok-skip-browser-warning': 'true'
+                },
                 body: JSON.stringify(body),
                 signal: controller.signal,
                 mode: 'cors',
