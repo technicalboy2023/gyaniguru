@@ -19,7 +19,7 @@ const CONFIG = {
             description: 'Intelligent conversation agent',
             icon: 'fa-comments',
             // REPLACE WITH YOUR N8N WEBHOOK URL
-            webhookUrl: 'https://vps3289043.tail2c4978.ts.net/webhook/mychatapp',
+            webhookUrl: 'https://wuthering-ressie-subcarinated.ngrok-free.dev/webhook/mychatapp',
             inputType: 'textarea',
             placeholder: 'Ask me anything...',
         },
