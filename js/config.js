@@ -39,7 +39,7 @@ const CONFIG = {
             description: 'SEO blog post generation agent',
             icon: 'fa-blog',
             // REPLACE WITH YOUR N8N WEBHOOK URL
-            webhookUrl: 'https://wuthering-ressie-subcarinated.ngrok-free.dev/webhook/mychatapp',
+            webhookUrl: 'https://wuthering-ressie-subcarinated.ngrok-free.dev/webhook/blog-agent',
             inputType: 'textarea',
             placeholder: 'Enter blog topic...',
         }
